@@ -28,7 +28,7 @@ import ContrastDiversity from './components/ContrastDiversity.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename="/ecommerce">
     <Routes>
       <Route path='/'element={<ProjectHomePage/>}></Route>
       <Route path='/homepage' element={<HomePage />}></Route>

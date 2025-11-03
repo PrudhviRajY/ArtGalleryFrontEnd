@@ -5,6 +5,10 @@ import "slick-carousel/slick/slick-theme.css";
 import '../css/ProjectHomePage.css';
 
 export class ProjectHomePage extends Component {
+  // Use Vite environment variable for API base URL so builds (including Jenkins) can set it at build time.
+  // Set VITE_API_URL during build (example: VITE_API_URL=https://api.example.com)
+  // Default falls back to localhost:8080 to keep local dev working.
+  API_BASE = import.meta.env.VITE_API_URL || 'http://localhost:8080';
   state = {
     showSignup: false,
     showSignin: false,
@@ -38,7 +42,7 @@ handleSignup = async (e) => {
     }
 
     try {
-      const response = await fetch("http://localhost:8082/api/users/signup", {
+      const response = await fetch(`${this.API_BASE}/api/users/signup`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ fullname, email, password, role }),
@@ -70,7 +74,7 @@ handleSignup = async (e) => {
     const { email, password } = this.state;
 
     try {
-        const response = await fetch("http://localhost:8082/api/users/signin", {
+    const response = await fetch(`${this.API_BASE}/api/users/signin`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ email, password }),
